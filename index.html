@@ -174,9 +174,75 @@
     /* Chat mockup */
     .chat-msg { animation: fadeSlideUp 0.5s ease both; }
 
+    /* ── HAMBURGER ── */
+    .hamburger {
+      display: none; flex-direction: column; justify-content: center; gap: 5px;
+      cursor: pointer; background: none; border: none; padding: 6px; z-index: 201;
+    }
+    .hamburger span { display: block; width: 22px; height: 1.5px; transition: all 0.3s ease; }
+    .lnav.solid .hamburger span { background: var(--text); }
+    .lnav.hero .hamburger span { background: rgba(255,255,255,0.8); }
+
+    /* ── MOBILE MENU ── */
+    .mobile-menu {
+      position: fixed; top: var(--nav-h); left: 0; right: 0; z-index: 198;
+      background: rgba(250,248,243,0.98); backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      padding: 8px 20px 28px;
+      border-bottom: 1px solid rgba(0,0,0,0.07);
+      transform: translateY(-110%);
+      transition: transform 0.38s cubic-bezier(0.16,1,0.3,1);
+      display: flex; flex-direction: column;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.08);
+    }
+    .mobile-menu.open { transform: translateY(0); }
+    .mobile-menu-link {
+      font-size: 15px; font-weight: 500; color: var(--text);
+      padding: 15px 0; border: none; border-bottom: 1px solid rgba(0,0,0,0.05);
+      cursor: pointer; background: none; text-align: left;
+      font-family: 'DM Sans', sans-serif; letter-spacing: 0.02em;
+      transition: color 0.2s;
+    }
+    .mobile-menu-link:hover { color: var(--gold); }
+    .mobile-menu-cta { margin-top: 20px; width: 100%; justify-content: center; }
+
+    /* ── NAV BREAKPOINT ── */
     @media (max-width: 860px) {
-      .lnav { padding: 0 24px; }
-      .lnav-links .lnav-link { display: none; }
+      .lnav { padding: 0 20px; }
+      .lnav-links { display: none; }
+      .hamburger { display: flex !important; }
+    }
+
+    /* ── RESPONSIVE UTILITIES ── */
+    @media (max-width: 900px) {
+      /* Service cards: 3→2 col */
+      .grid-3col { grid-template-columns: repeat(2, 1fr) !important; }
+      /* Process: 4→2 col */
+      .grid-4col { grid-template-columns: repeat(2, 1fr) !important; }
+      /* Testimonials: 3→1 col */
+      .grid-3col-proof { grid-template-columns: 1fr !important; }
+      /* Trust badges: row → 2-col wrap */
+      .trust-badges { flex-wrap: wrap !important; }
+      .trust-badges > * { flex: 0 0 calc(50% + 1px) !important; box-sizing: border-box; }
+      /* Footer: 4→2 col */
+      .footer-grid { grid-template-columns: 1fr 1fr !important; gap: 36px !important; }
+      /* Footer brand: span full width */
+      .footer-brand { grid-column: 1 / -1 !important; }
+    }
+
+    @media (max-width: 640px) {
+      /* All 2+ col grids collapse to 1 */
+      .grid-3col, .grid-4col, .grid-3col-proof { grid-template-columns: 1fr !important; }
+      .trust-badges > * { flex: 0 0 100% !important; }
+      /* Footer collapse */
+      .footer-grid { grid-template-columns: 1fr !important; }
+      /* Form 2-col → 1-col */
+      .form-grid-2 { grid-template-columns: 1fr !important; }
+      /* Buttons stack */
+      .btn-row { flex-direction: column !important; align-items: stretch !important; }
+      .btn-row .btn { text-align: center; justify-content: center; }
+      /* Progress stepper: compress labels */
+      .step-label { display: none !important; }
     }
   </style>
 </head>
